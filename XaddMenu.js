@@ -10,7 +10,7 @@
  */
 //
 function addMainMenu(stText, stUrl, stImg, target) {
-	console.log('動作テスト用');
+	//console.log('動作テスト用');
 	
 	//現状の取得
 	let nav = document.querySelector('nav[aria-label*="メインメニュー"]');
@@ -53,8 +53,53 @@ function addMainMenu(stText, stUrl, stImg, target) {
 	nico_div.appendChild(div_icon);
 	nico_div.appendChild(div_word);
 
-	console.log(nav);
+	//console.log(nav);
 	
+}
+
+/*
+SelectBoxを追加する
+*/
+function addSelectBox(select, stText, stValue) {
+	
+	// optionタグを作成する
+  var option = document.createElement("option");
+  // optionタグのテキストを4に設定する
+  option.text = stText;
+  // optionタグのvalueを4に設定する
+  option.value = stValue;
+  // selectタグの子要素にoptionタグを追加する
+  select.appendChild(option);
+  
+  return select;
+	
+}
+
+/*
+Synthmaniacs SelectBoxを表示する
+*/
+function dispSelectBox() {
+	
+	//現状の取得
+	let nav = document.querySelector('nav[aria-label*="メインメニュー"]');
+	
+	// 新しいHTML要素を作成
+	let select = document.createElement('select');
+	select.setAttribute('class', 'css-175oi2r r-6koalj r-eqz5dr r-16y2uox r-1habvwh r-cnw61z r-13qz1uu r-1ny4l3l r-1loqt21');
+	select.setAttribute('style', 'font-size:19px;background-color: rgb(21, 32, 43);margin:10px 0px 10px 0px;');
+	select.setAttribute('id', 'Synthmaniacs');
+	
+  //空項目の追加
+  select = addSelectBox(select, "-----Synthmaniacs Menu-----", "");
+	select = addSelectBox(select, "譜束 ぴあの", "https://www.youtube.com/@FutabaPiano");
+	select = addSelectBox(select, "譜束 いおり", "https://www.youtube.com/@FutabaIori");
+	select = addSelectBox(select, "刻美 りずむ", "https://www.youtube.com/@KizamiRizumu");
+	select = addSelectBox(select, "波導 らいざ", "https://www.youtube.com/@NamidoRaiza");
+	select = addSelectBox(select, "符洛院 カナデ", "https://www.youtube.com/@PuraguinKanade");
+	select = addSelectBox(select, "天空乃 ヒビキ", "https://www.youtube.com/@TechnoHibiki");
+	
+  // 指定した要素の中の末尾に挿入
+	nav.appendChild(select);
 }
 
 /*
@@ -71,9 +116,31 @@ addMainMenu('にこちX',
 					'https://x.com/sinonomenico',
 					'https://pbs.twimg.com/profile_images/1934996148537937920/DzYYl_sc_normal.jpg',
 					false);
+//シンセマニアクスメンバーの追加
+dispSelectBox();
+}
 
+/*
+//チェンジイベント
+*/
+function changedSelectBox(){
+	
+	const selectElement = document.querySelector('#Synthmaniacs');
+	
+	//イベントを組み込む
+  selectElement.addEventListener('change', (event) => {
+  // const result = document.querySelector('.output');
+  // classがoutputのtextContentに選択された項目のvalue要素を代入。
+  // console.log("チェンジイベント:" + event.target.value);
+  
+  	if (event.target.value!=""){
+  		// 新しいページを開く
+  		let newwin = window.open(event.target.value);
+  	}
+  });
 }
 
 //要素を読み込んだ後に実行
 window.setTimeout(addMain, 1000);
-//window.onload = addMainMenu();
+//チェンジイベントの組み込み
+window.setTimeout(changedSelectBox, 1000);
